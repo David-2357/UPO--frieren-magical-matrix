@@ -14,6 +14,7 @@ public class UPOFrierenMagicalMatrix {
             long recursiveMultiplicationTotal = 0;
             for(int i = 0; i < NUM_ITERATIONS; i++){
                 int[][] matrix = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
+                int[][] matrix2 = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
                 long iterativeMultiplicationStart = System.nanoTime();
                 // funcion de mult iterativa aqui
                 long iterativeMultiplicationEnd = System.nanoTime();
