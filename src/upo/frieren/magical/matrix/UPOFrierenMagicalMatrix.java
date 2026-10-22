@@ -1,20 +1,58 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
 package upo.frieren.magical.matrix;
 
-/**
- *
- * @author eps
- */
 public class UPOFrierenMagicalMatrix {
 
-    /**
-     * @param args the command line arguments
-     */
+    public static final int NUM_ITERATIONS = 5;
+    public static final int[] NUM_ROWS = {2, 5, 10, 20, 50, 100};
+    public static final int[] NUM_COLUMNS = {2, 5, 10, 20, 50, 100};
+    public static int MAX_NUM_RANDOM = 10;
+
     public static void main(String[] args) {
-        // TODO code application logic here
+        for(int tamIndex = 0; tamIndex < NUM_ROWS.length; tamIndex++){
+            long iterativeMultiplicationTotal = 0;
+            long recursiveMultiplicationTotal = 0;
+            for(int i = 0; i < NUM_ITERATIONS; i++){
+                int[][] matrix = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
+                long iterativeMultiplicationStart = System.nanoTime();
+                // funcion de mult iterativa aqui
+                long iterativeMultiplicationEnd = System.nanoTime();
+
+                long recursiveMultiplicationStart = System.nanoTime();
+                // funcion de mult recursiva aqui
+                long recursiveMultiplicationEnd = System.nanoTime();
+
+                iterativeMultiplicationTotal += iterativeMultiplicationStart - iterativeMultiplicationEnd;
+                recursiveMultiplicationTotal += recursiveMultiplicationStart - recursiveMultiplicationEnd;
+            }
+
+            System.out.println("\n====================\nTotal de tiempo para " + NUM_ITERATIONS + " iteraciones para una matriz de tamaño " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + ": ");
+            System.out.println("Iterativo: " + iterativeMultiplicationTotal);
+            System.out.println("Recursivo: " + recursiveMultiplicationTotal);
+        }
+    }
+
+    public static int[][] generateRandomMatrix(int rows, int columns){
+        int[][] matrix = new int[rows][columns];
+
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < columns; j++){
+                matrix[i][j] = (int) (Math.random() * MAX_NUM_RANDOM);
+            }
+        }
+
+        return matrix;
+    }
+
+    // metodo auxiliar por si queremos comprobar 
+    public static void printMatrix(int[][] matrix){
+        for(int i = 0; i < matrix.length; i++){
+            System.out.print("\n{");
+            for(int j = 0; j < matrix[0].length-1; j++){
+                System.out.print(matrix[i][j] + ", ");
+            }
+            System.out.print(matrix[i][matrix[0].length-1] + "}");
+        }
     }
     
 }
