@@ -45,7 +45,7 @@ public class UPOFrierenMagicalMatrix {
         return matrix;
     }
 
-    // metodo auxiliar por si queremos comprobar 
+    // metodo auxiliar por si queremos comprobar
     public static void printMatrix(int[][] matrix){
         for(int i = 0; i < matrix.length; i++){
             System.out.print("\n{");
@@ -55,5 +55,69 @@ public class UPOFrierenMagicalMatrix {
             System.out.print(matrix[i][matrix[0].length-1] + "}");
         }
     }
-    
+
+    public static boolean bothMatrixAreSameLength(int[][] matrix1, int[][] matrix2) {
+        // Comprobamos que la primera lista sea del mismo tamano
+        if (matrix1.length != matrix2.length) {
+            return false;
+        }
+
+        // Comprobamos la primera de dentro
+        if (matrix1[0].length != matrix2[0].length) {
+            return false;
+        }
+
+        // Comprobamos la ultima por si acaso xd
+        if (matrix1[matrix1.length - 1].length != matrix2[matrix2.length - 1].length) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public static int[][] multiplicateMatrixIterative(int[][] matrix1, int[][] matrix2) {
+        // Validacion inicial (hecha por Fern, porque Frieren sigue dormida xd)
+        if (!UPOFrierenMagicalMatrix.bothMatrixAreSameLength(matrix1, matrix2)) {
+            throw new IllegalArgumentException("\nMuy mal señorita Frieren, la matriz de grimorios tienen que ser del mismo tamaño\n -Fern");
+        }
+
+        int interiorLength = matrix1[0].length;
+        int[][] resultMatrix = new int[matrix1.length][interiorLength];
+
+        for (int i = 0; i < matrix1.length; i++) {
+            for (int j = 0; j < interiorLength; j++) {
+                resultMatrix[i][j] = matrix1[i][j] * matrix2[i][j];
+            }
+        }
+
+        return resultMatrix;
+    }
+
+    public static int[][] multiplicateMatrixRecursive(int[][] matrix1, int[][] matrix2, int i, int j, int[][] result) {
+        int interiorLength = matrix1[0].length;
+
+        // Hacerlo solo en el primer caso para que sea optima
+        if (i == 0 && j == 0) {
+            result = new int[matrix1.length][interiorLength];
+
+            // Validacion inicial (hecha por Fern, porque Frieren sigue dormida xd)
+            if (!UPOFrierenMagicalMatrix.bothMatrixAreSameLength(matrix1, matrix2)) {
+                throw new IllegalArgumentException("\nMuy mal señorita Frieren, la matriz de grimorios tienen que ser del mismo tamaño\n -Fern");
+            }
+        }
+
+
+        if (i == matrix1.length-1 && j == interiorLength-1) {
+            return result;
+        }
+
+        if (j == interiorLength-1) {
+            j = 0;
+            i++;
+        }
+
+        result[i][j] = matrix1[i][j] * matrix2[i][j];
+
+        return result;
+    }
 }
