@@ -12,24 +12,29 @@ public class UPOFrierenMagicalMatrix {
         for(int tamIndex = 0; tamIndex < NUM_ROWS.length; tamIndex++){
             long iterativeMultiplicationTotal = 0;
             long recursiveMultiplicationTotal = 0;
+            double iterativeDurationMiliseconds = 0;
+            double recursiveDurationMiliseconds = 0;
             for(int i = 0; i < NUM_ITERATIONS; i++){
                 int[][] matrix = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
                 int[][] matrix2 = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
                 long iterativeMultiplicationStart = System.nanoTime();
-                // funcion de mult iterativa aqui
+                // funcion de mult recursiva aqui
                 long iterativeMultiplicationEnd = System.nanoTime();
 
                 long recursiveMultiplicationStart = System.nanoTime();
                 // funcion de mult recursiva aqui
                 long recursiveMultiplicationEnd = System.nanoTime();
 
-                iterativeMultiplicationTotal += iterativeMultiplicationStart - iterativeMultiplicationEnd;
-                recursiveMultiplicationTotal += recursiveMultiplicationStart - recursiveMultiplicationEnd;
+                iterativeMultiplicationTotal += iterativeMultiplicationEnd - iterativeMultiplicationStart;
+                recursiveMultiplicationTotal += recursiveMultiplicationEnd - recursiveMultiplicationStart;
             }
 
+            iterativeDurationMiliseconds = iterativeMultiplicationTotal / 1000000.0;
+            recursiveDurationMiliseconds = recursiveMultiplicationTotal / 1000000.0;
+
             System.out.println("\n====================\nTotal de tiempo para " + NUM_ITERATIONS + " iteraciones para una matriz de tamaño " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + ": ");
-            System.out.println("Iterativo: " + iterativeMultiplicationTotal);
-            System.out.println("Recursivo: " + recursiveMultiplicationTotal);
+            System.out.println("Iterativo: " + iterativeDurationMiliseconds + "ms");
+            System.out.println("Recursivo: " + recursiveDurationMiliseconds + "ms");
         }
     }
 
