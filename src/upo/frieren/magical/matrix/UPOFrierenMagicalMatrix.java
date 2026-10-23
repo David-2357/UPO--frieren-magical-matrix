@@ -12,8 +12,8 @@ public class UPOFrierenMagicalMatrix {
         for(int tamIndex = 0; tamIndex < NUM_ROWS.length; tamIndex++){
             long iterativeMultiplicationTotal = 0;
             long recursiveMultiplicationTotal = 0;
-            double iterativeDurationMiliseconds = 0;
-            double recursiveDurationMiliseconds = 0;
+            double iterativeDurationMiliseconds;
+            double recursiveDurationMiliseconds;
             for(int i = 0; i < NUM_ITERATIONS; i++){
                 int[][] matrix1 = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
                 int[][] matrix2 = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
@@ -75,11 +75,7 @@ public class UPOFrierenMagicalMatrix {
         }
 
         // Comprobamos la ultima por si acaso xd
-        if (matrix1[matrix1.length - 1].length != matrix2.length) {
-            return false;
-        }
-
-        return true;
+        return matrix1[matrix1.length - 1].length == matrix2.length;
     }
 
     public static int[][] multiplyMatrixIterative(int[][] matrix1, int[][] matrix2) {
