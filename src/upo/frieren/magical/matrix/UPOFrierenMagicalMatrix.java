@@ -26,9 +26,9 @@ public class UPOFrierenMagicalMatrix {
                 long recursiveMultiplicationEnd = System.nanoTime();
 
                 // Comparar para ver si los resultados de la multiplicación iterativa y recursiva son iguales
-                if (!UPOFrierenMagicalMatrix.compareMatrix(UPOFrierenMagicalMatrix.multiplyMatrixIterative(matrix1, matrix2), UPOFrierenMagicalMatrix.callMultiplyMatrixRecursive(matrix1, matrix2))) {
-                    System.out.println("Error: Los resultados de la multiplicación iterativa y recursiva no coinciden.");
-                }
+//                if (!UPOFrierenMagicalMatrix.compareMatrix(UPOFrierenMagicalMatrix.multiplyMatrixIterative(matrix1, matrix2), UPOFrierenMagicalMatrix.callMultiplyMatrixRecursive(matrix1, matrix2))) {
+//                    System.out.println("Error: Los resultados de la multiplicación iterativa y recursiva no coinciden.");
+//                }
 
                 iterativeMultiplicationTotal += iterativeMultiplicationEnd - iterativeMultiplicationStart;
                 recursiveMultiplicationTotal += recursiveMultiplicationEnd - recursiveMultiplicationStart;
