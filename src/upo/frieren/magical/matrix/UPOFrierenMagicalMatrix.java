@@ -255,33 +255,4 @@ public class UPOFrierenMagicalMatrix {
 
         return true;
     }
-
-    public static void viewResults(int[][] matrix1, int[][] matrix2, int[][] matrixResIt, int[][] matrixResRec, int index, int tamIndex){
-        // Solo mostrar la multiplicacion de matrices de la primera iteracion para cada tamaño, asi no llenamos la pantalla
-        if(index != 0){
-            return; 
-        }
-
-        System.out.println("\n=============\n Resultados para un tamaño de " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + ": ");
-
-        System.out.println("\n\nMatriz 1: ");
-        printMatrix(matrix1);
-
-        System.out.println("\n\nMatriz 2: ");
-        printMatrix(matrix2);
-
-        System.out.println("\n\nMatriz resultado de la multiplicación iterativa: ");
-        printMatrix(matrixResIt);
-        
-        System.out.println("\n\nMatriz resultado de la multiplicación recursiva: ");
-        printMatrix(matrixResRec);
-
-        // Comparar para ver si los resultados de la multiplicación iterativa y recursiva son iguales
-        if (!compareMatrix(matrixResIt, matrixResRec)) {
-            System.out.println("\nError: Los resultados de la multiplicación iterativa y recursiva no coinciden.");
-        } else {
-            System.out.println("\n\nAdemás, los resultados de ambas multiplicaciones coinciden!");
-        }
-
-    }
 }
