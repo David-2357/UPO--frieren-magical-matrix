@@ -17,6 +17,7 @@ public class UPOFrierenMagicalMatrix {
             for(int i = 0; i < NUM_ITERATIONS; i++){
                 int[][] matrix1 = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
                 int[][] matrix2 = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
+<<<<<<< Updated upstream
 
                 System.out.println("\n\nMatrix 1:");
                 printMatrix(matrix1);
@@ -25,14 +26,30 @@ public class UPOFrierenMagicalMatrix {
 
                 long iterativeMultiplicationStart = System.nanoTime();
                 int[][] matrixResIt = UPOFrierenMagicalMatrix.multiplyMatrixIterative(matrix1, matrix2);
+=======
+                System.out.println("\nMatrix 1: ");
+                printMatrix(matrix1);
+                System.out.println("\n\nMatrix 2: ");
+                printMatrix(matrix2);
+
+                long iterativeMultiplicationStart = System.nanoTime();
+                int[][] matrixResIt = multiplicateMatrixIterative(matrix1, matrix2);
+>>>>>>> Stashed changes
                 long iterativeMultiplicationEnd = System.nanoTime();
 
                 System.out.println("\n\nMatrix res it: ");
                 printMatrix(matrixResIt);
 
                 long recursiveMultiplicationStart = System.nanoTime();
+<<<<<<< Updated upstream
                 int[][] matrixResRec = UPOFrierenMagicalMatrix.callMultiplyMatrixRecursive(matrix1, matrix2);
+=======
+                int[][] matrixResRec = multiplicateMatrixRecursive(matrix1, matrix2);
+>>>>>>> Stashed changes
                 long recursiveMultiplicationEnd = System.nanoTime();
+                
+                System.out.println("\n\nMatrix res rec: ");
+                printMatrix(matrixResRec);
 
                 System.out.println("\n\nMatrix res rec: ");
                 printMatrix(matrixResRec);
@@ -134,9 +151,19 @@ public class UPOFrierenMagicalMatrix {
         return resultMatrix;
     }
 
+<<<<<<< Updated upstream
     // Metodo auxilirar que multiplica y suma la fila de la primera con la columna de la segunda
     public static int multiplyListsInMatrix(int[] rowOfFirst, int[] colOfSecond) {
         int result = 0;
+=======
+    public static int[][] multiplicateMatrixRecursive(int[][] matrix1, int[][] matrix2){
+        int[][] result = new int[matrix1.length][matrix2[0].length];
+        return multiplicateMatrixRecursiveAux(matrix1, matrix2, 0, 0, result);
+    }
+
+    public static int[][] multiplicateMatrixRecursiveAux(int[][] matrix1, int[][] matrix2, int i, int j, int[][] result) {
+        int interiorLength = matrix1[0].length;
+>>>>>>> Stashed changes
 
         for (int i = 0; i < rowOfFirst.length; i++) {
             result += rowOfFirst[i] * colOfSecond[i];
