@@ -23,11 +23,33 @@ public class UPOFrierenMagicalMatrix {
 
                 long iterativeMultiplicationStart = System.nanoTime();
                 int[][] matrixResIt = UPOFrierenMagicalMatrix.multiplyMatrixIterative(matrix1, matrix2);
+
+                System.out.println("\n\nMatrix 1:");
+                printMatrix(matrix1);
+                System.out.println("\n\nMatrix 2");
+                printMatrix(matrix2);
+
+                long iterativeMultiplicationStart = System.nanoTime();
+                int[][] matrixResIt = UPOFrierenMagicalMatrix.multiplyMatrixIterative(matrix1, matrix2);
                 long iterativeMultiplicationEnd = System.nanoTime();
+
+                System.out.println("\n\nMatrix res it: ");
+                printMatrix(matrixResIt);
 
                 long recursiveMultiplicationStart = System.nanoTime();
                 int[][] matrixResRec = UPOFrierenMagicalMatrix.callMultiplyMatrixRecursive(matrix1, matrix2);
                 long recursiveMultiplicationEnd = System.nanoTime();
+                
+                System.out.println("\n\nMatrix res rec: ");
+                printMatrix(matrixResRec);
+
+                System.out.println("\n\nMatrix res rec: ");
+                printMatrix(matrixResRec);
+
+                // Comparar para ver si los resultados de la multiplicación iterativa y recursiva son iguales
+//                if (!UPOFrierenMagicalMatrix.compareMatrix(UPOFrierenMagicalMatrix.multiplyMatrixIterative(matrix1, matrix2), UPOFrierenMagicalMatrix.callMultiplyMatrixRecursive(matrix1, matrix2))) {
+//                    System.out.println("Error: Los resultados de la multiplicación iterativa y recursiva no coinciden.");
+//                }
 
                 iterativeMultiplicationTotal += iterativeMultiplicationEnd - iterativeMultiplicationStart;
                 recursiveMultiplicationTotal += recursiveMultiplicationEnd - recursiveMultiplicationStart;
@@ -124,6 +146,9 @@ public class UPOFrierenMagicalMatrix {
         return resultMatrix;
     }
 
+    // Metodo auxilirar que multiplica y suma la fila de la primera con la columna de la segunda
+    public static int multiplyListsInMatrix(int[] rowOfFirst, int[] colOfSecond) {
+        int result = 0;
     // Metodo auxilirar que multiplica y suma la fila de la primera con la columna de la segunda
     public static int multiplyListsInMatrix(int[] rowOfFirst, int[] colOfSecond) {
         int result = 0;
