@@ -8,7 +8,6 @@ public class UPOFrierenMagicalMatrix {
     public static final int[] NUM_COLUMNS = {2, 5, 10, 20, 50, 100, 500, 1000}; // array de numeros de columnas
     public static int MAX_NUM_RANDOM = 10; // numero maximo que puede salir al rellenar las matrices con numeros aleatorios
 
-    @SuppressWarnings("unused") // si dejas la funcion de verResultados comentada, no se usan las matrices resultado, por eso quito los warnings
     public static void main(String[] args) {
         for(int tamIndex = 0; tamIndex < NUM_ROWS.length; tamIndex++){
             long iterativeMultiplicationTotal = 0;
@@ -35,16 +34,8 @@ public class UPOFrierenMagicalMatrix {
                 matrixResRec = UPOFrierenMagicalMatrix.callMultiplyMatrixRecursive(matrix1, matrix2);
                 long recursiveMultiplicationEnd = System.nanoTime();
 
-                // Comparar para ver si los resultados de la multiplicación iterativa y recursiva son iguales
-//                if (!UPOFrierenMagicalMatrix.compareMatrix(UPOFrierenMagicalMatrix.multiplyMatrixIterative(matrix1, matrix2), UPOFrierenMagicalMatrix.callMultiplyMatrixRecursive(matrix1, matrix2))) {
-//                    System.out.println("Error: Los resultados de la multiplicación iterativa y recursiva no coinciden.");
-//                }
-
                 iterativeMultiplicationTotal += iterativeMultiplicationEnd - iterativeMultiplicationStart;
                 recursiveMultiplicationTotal += recursiveMultiplicationEnd - recursiveMultiplicationStart;
-
-                // ver los resultados de las multiplicaciones para verificar si están bien
-                // viewResults(matrix1, matrix2, matrixResIt, matrixResRec, i, tamIndex);
             }
 
             iterativeDurationMiliseconds = iterativeMultiplicationTotal / 1000000.0; // entre un millón para pasar de nanosegundos a ms
@@ -61,7 +52,7 @@ public class UPOFrierenMagicalMatrix {
         System.out.println("Recursivo: " + recursiveDurationMiliseconds + "ms");
 
 
-        // Si son muchas, no mostrar las matrices, porque se llenaria la pantalla de numeros y no se veria nada
+        // Si son muchas, no mostrar las matrices, porque se llenaria la pantalla de numeros y no se veria nada xd
         if (NUM_ROWS[tamIndex] > 10 || NUM_COLUMNS[tamIndex] > 10) {
             System.out.println("\nMatrices demasiado grandes para mostrar, no se muestran los resultados de la multiplicación.");
 
