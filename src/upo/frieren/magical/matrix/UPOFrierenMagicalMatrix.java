@@ -3,9 +3,9 @@ package upo.frieren.magical.matrix;
 
 public class UPOFrierenMagicalMatrix {
 
-    public static final int NUM_ITERATIONS = 5;
-    public static final int[] NUM_ROWS = {2, 5, 10, 20, 50, 100, 1000};
-    public static final int[] NUM_COLUMNS = {2, 5, 10, 20, 50, 100, 1000};
+    public static final int NUM_ITERATIONS = 1;
+    public static final int[] NUM_ROWS = {2, 5, 10};
+    public static final int[] NUM_COLUMNS = {2, 5, 10};
     public static int MAX_NUM_RANDOM = 10;
 
     public static void main(String[] args) {
@@ -17,13 +17,25 @@ public class UPOFrierenMagicalMatrix {
             for(int i = 0; i < NUM_ITERATIONS; i++){
                 int[][] matrix1 = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
                 int[][] matrix2 = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
+
+                System.out.println("\n\nMatrix 1:");
+                printMatrix(matrix1);
+                System.out.println("\n\nMatrix 2");
+                printMatrix(matrix2);
+
                 long iterativeMultiplicationStart = System.nanoTime();
-                UPOFrierenMagicalMatrix.multiplyMatrixIterative(matrix1, matrix2);
+                int[][] matrixResIt = UPOFrierenMagicalMatrix.multiplyMatrixIterative(matrix1, matrix2);
                 long iterativeMultiplicationEnd = System.nanoTime();
 
+                System.out.println("\n\nMatrix res it: ");
+                printMatrix(matrixResIt);
+
                 long recursiveMultiplicationStart = System.nanoTime();
-                UPOFrierenMagicalMatrix.callMultiplyMatrixRecursive(matrix1, matrix2);
+                int[][] matrixResRec = UPOFrierenMagicalMatrix.callMultiplyMatrixRecursive(matrix1, matrix2);
                 long recursiveMultiplicationEnd = System.nanoTime();
+
+                System.out.println("\n\nMatrix res rec: ");
+                printMatrix(matrixResRec);
 
                 // Comparar para ver si los resultados de la multiplicación iterativa y recursiva son iguales
 //                if (!UPOFrierenMagicalMatrix.compareMatrix(UPOFrierenMagicalMatrix.multiplyMatrixIterative(matrix1, matrix2), UPOFrierenMagicalMatrix.callMultiplyMatrixRecursive(matrix1, matrix2))) {
