@@ -231,7 +231,7 @@ public class UPOFrierenMagicalMatrix {
         multiplyRows(matrix1, column, row + 1, col, result);
     }
 
-    // Metodo auxiliar para ver si dan el mismo resultado la iterativa y la recursiva
+    // Metodo auxiliar para ver si dan el mismo resultado la iterativa y la recursiva (Hecho por Heiter, que sabe mas de estas cosas xd)
     public static boolean compareMatrix(int[][] matrix1, int[][] matrix2) {
         if (!UPOFrierenMagicalMatrix.bothMatrixCanBeMultiplied(matrix1, matrix2)) {
             return false;
