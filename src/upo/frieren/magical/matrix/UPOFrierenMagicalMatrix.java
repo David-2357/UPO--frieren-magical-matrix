@@ -3,7 +3,7 @@ package upo.frieren.magical.matrix;
 
 public class UPOFrierenMagicalMatrix {
 
-    public static final int NUM_ITERATIONS = 5; // cuantas iteraciones se hacen por cada tamaño de filas y columnas
+    public static final int NUM_ITERATIONS = 5; // cuantas iteraciones se hacen para el warmup
     public static final int[] NUM_ROWS = {2, 5, 10, 20, 50, 100, 500, 1000}; // array de numeros de filas
     public static final int[] NUM_COLUMNS = {2, 5, 10, 20, 50, 100, 500, 1000}; // array de numeros de columnas
     public static int MAX_NUM_RANDOM = 10; // numero maximo que puede salir al rellenar las matrices con numeros aleatorios
@@ -41,12 +41,12 @@ public class UPOFrierenMagicalMatrix {
             iterativeDurationMiliseconds = iterativeMultiplicationTotal / 1000000.0; // entre un millón para pasar de nanosegundos a ms
             recursiveDurationMiliseconds = recursiveMultiplicationTotal / 1000000.0;
 
-            printResults(matrix1, matrix2, matrixResIt, matrixResRec, tamIndex, (long) iterativeDurationMiliseconds, (long) recursiveDurationMiliseconds);
+            printResults(matrix1, matrix2, matrixResIt, matrixResRec, tamIndex, iterativeDurationMiliseconds, recursiveDurationMiliseconds, NUM_ITERATIONS);
         }
     }
 
-    public static void printResults(int[][] matrix1, int[][] matrix2, int[][] matrixResIt, int[][] matrixResRec, int tamIndex, long iterativeDurationMiliseconds, long recursiveDurationMiliseconds) {
-         System.out.println("\n=============\nResultados para un tamaño de " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + ": ");
+    public static void printResults(int[][] matrix1, int[][] matrix2, int[][] matrixResIt, int[][] matrixResRec, int tamIndex, double iterativeDurationMiliseconds, double recursiveDurationMiliseconds, int NUM_ITERATIONS) {
+         System.out.println("\n=============\nResultados para un tamaño de " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + " (warmup de " + (NUM_ITERATIONS - 1) + " iteraciones):");
 
         System.out.println(" Iterativo: " + iterativeDurationMiliseconds + "ms");
         System.out.println(" Recursivo: " + recursiveDurationMiliseconds + "ms");
