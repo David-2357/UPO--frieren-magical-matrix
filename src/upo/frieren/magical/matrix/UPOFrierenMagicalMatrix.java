@@ -46,14 +46,15 @@ public class UPOFrierenMagicalMatrix {
     }
 
     public static void printResults(int[][] matrix1, int[][] matrix2, int[][] matrixResIt, int[][] matrixResRec, int tamIndex, long iterativeDurationMiliseconds, long recursiveDurationMiliseconds) {
-         System.out.println("\n=============\n Resultados para un tamaño de " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + ": ");
+         System.out.println("\n=============\nResultados para un tamaño de " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + ": ");
 
-        System.out.println("Iterativo: " + iterativeDurationMiliseconds + "ms");
-        System.out.println("Recursivo: " + recursiveDurationMiliseconds + "ms");
+        System.out.println(" Iterativo: " + iterativeDurationMiliseconds + "ms");
+        System.out.println(" Recursivo: " + recursiveDurationMiliseconds + "ms");
 
 
+        // Descomentar si se quieren ver las matrices
         // Si son muchas, no mostrar las matrices, porque se llenaria la pantalla de numeros y no se veria nada xd
-        if (NUM_ROWS[tamIndex] > 10 || NUM_COLUMNS[tamIndex] > 10) {
+        /* if (NUM_ROWS[tamIndex] > 10 || NUM_COLUMNS[tamIndex] > 10) {
             System.out.println("\nMatrices mágicas demasiado grandes para mostrar. Frieren podría esperar mil años a que aparezcan los resultados de la multiplicación, pero le daria pereza revisarlos todos. ( ￣＾￣)");
 
         }else {
@@ -68,14 +69,14 @@ public class UPOFrierenMagicalMatrix {
 
             System.out.println("\nMatriz resultado de la multiplicación recursiva: ");
             printMatrix(matrixResRec);
-        }
+        }*/
 
 
         // Comparar para ver si los resultados de la multiplicación iterativa y recursiva son iguales
         if (!compareMatrix(matrixResIt, matrixResRec)) {
             System.out.println("\nError: Los resultados de la multiplicación iterativa y recursiva no coinciden. Heiter es un hater (ｰ ｰ;)");
         } else {
-            System.out.println("\nLos resultados de ambas multiplicaciones coinciden, yay! (Gracias Heiter por comprobarlo)");
+            System.out.println("\nLos resultados de ambas multiplicaciones coinciden, yay (─‿‿─)! (Gracias Heiter por comprobarlo)");
         }
     }
 
