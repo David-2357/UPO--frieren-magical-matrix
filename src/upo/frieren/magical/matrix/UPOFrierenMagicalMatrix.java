@@ -33,7 +33,7 @@ public class UPOFrierenMagicalMatrix {
                 recursiveMultiplicationTotal += recursiveMultiplicationEnd - recursiveMultiplicationStart;
 
                 // ver los resultados de las multiplicaciones para verificar si están bien
-                verResultados(matrix1, matrix2, matrixResIt, matrixResRec, i, tamIndex);
+                // verResultados(matrix1, matrix2, matrixResIt, matrixResRec, i, tamIndex);
             }
 
             iterativeDurationMiliseconds = iterativeMultiplicationTotal / 1000000.0; // entre un millón para pasar de nanosegundos a ms
