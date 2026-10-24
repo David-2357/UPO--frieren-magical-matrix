@@ -54,13 +54,13 @@ public class UPOFrierenMagicalMatrix {
 
         // Si son muchas, no mostrar las matrices, porque se llenaria la pantalla de numeros y no se veria nada xd
         if (NUM_ROWS[tamIndex] > 10 || NUM_COLUMNS[tamIndex] > 10) {
-            System.out.println("\nMatrices demasiado grandes para mostrar, no se muestran los resultados de la multiplicación.");
+            System.out.println("\nMatrices mágicas demasiado grandes para mostrar. Frieren podría esperar mil años a que aparezcan los resultados de la multiplicación, pero le daria pereza revisarlos todos. ( ￣＾￣)");
 
         }else {
-            System.out.println("\nMatriz 1: ");
+            System.out.println("\nMatriz magica 1: ");
             printMatrix(matrix1);
 
-            System.out.println("\nMatriz 2: ");
+            System.out.println("\nMatriz magica 2: ");
             printMatrix(matrix2);
 
             System.out.println("\nMatriz resultado de la multiplicación iterativa: ");
@@ -73,9 +73,9 @@ public class UPOFrierenMagicalMatrix {
 
         // Comparar para ver si los resultados de la multiplicación iterativa y recursiva son iguales
         if (!compareMatrix(matrixResIt, matrixResRec)) {
-            System.out.println("\nError: Los resultados de la multiplicación iterativa y recursiva no coinciden.");
+            System.out.println("\nError: Los resultados de la multiplicación iterativa y recursiva no coinciden. Heiter es un hater (ｰ ｰ;)");
         } else {
-            System.out.println("\nLos resultados de ambas multiplicaciones coinciden!");
+            System.out.println("\nLos resultados de ambas multiplicaciones coinciden, yay! (Gracias Heiter por comprobarlo)");
         }
     }
 
