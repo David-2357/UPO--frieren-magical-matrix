@@ -4,8 +4,8 @@ package upo.frieren.magical.matrix;
 public class UPOFrierenMagicalMatrix {
 
     public static final int NUM_ITERATIONS = 5; // cuantas iteraciones se hacen por cada tamaño de filas y columnas
-    public static final int[] NUM_ROWS = {2, 5, 10, 20, 50}; // array de numeros de filas
-    public static final int[] NUM_COLUMNS = {2, 5, 10, 20, 50}; // array de numeros de columnas
+    public static final int[] NUM_ROWS = {2, 5, 10, 20, 50, 100, 500, 1000}; // array de numeros de filas
+    public static final int[] NUM_COLUMNS = {2, 5, 10, 20, 50, 100, 500, 1000}; // array de numeros de columnas
     public static int MAX_NUM_RANDOM = 10; // numero maximo que puede salir al rellenar las matrices con numeros aleatorios
 
     @SuppressWarnings("unused") // si dejas la funcion de verResultados comentada, no se usan las matrices resultado, por eso quito los warnings
@@ -33,7 +33,7 @@ public class UPOFrierenMagicalMatrix {
                 recursiveMultiplicationTotal += recursiveMultiplicationEnd - recursiveMultiplicationStart;
 
                 // ver los resultados de las multiplicaciones para verificar si están bien
-                // verResultados(matrix1, matrix2, matrixResIt, matrixResRec, i, tamIndex);
+                // viewResults(matrix1, matrix2, matrixResIt, matrixResRec, i, tamIndex);
             }
 
             iterativeDurationMiliseconds = iterativeMultiplicationTotal / 1000000.0; // entre un millón para pasar de nanosegundos a ms
@@ -209,9 +209,9 @@ public class UPOFrierenMagicalMatrix {
         return true;
     }
 
-    public static void verResultados(int[][] matrix1, int[][] matrix2, int[][] matrixResIt, int[][] matrixResRec, int indice, int tamIndex){
+    public static void viewResults(int[][] matrix1, int[][] matrix2, int[][] matrixResIt, int[][] matrixResRec, int index, int tamIndex){
         // Solo mostrar la multiplicacion de matrices de la primera iteracion para cada tamaño, asi no llenamos la pantalla
-        if(indice != 0){
+        if(index != 0){
             return; 
         }
 
