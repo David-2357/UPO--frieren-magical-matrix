@@ -11,40 +11,29 @@ public class UPOFrierenMagicalMatrix {
     @SuppressWarnings("unused") // si dejas la funcion de verResultados comentada, no se usan las matrices resultado, por eso quito los warnings
     public static void main(String[] args) {
         for(int tamIndex = 0; tamIndex < NUM_ROWS.length; tamIndex++){
-
             long iterativeMultiplicationTotal = 0;
             long recursiveMultiplicationTotal = 0;
             double iterativeDurationMiliseconds = 0;
             double recursiveDurationMiliseconds = 0;
 
+            int[][] matrix1 = new int[NUM_ROWS[tamIndex]][NUM_COLUMNS[tamIndex]];
+            int[][] matrix2 = new int[NUM_ROWS[tamIndex]][NUM_COLUMNS[tamIndex]];
+
+            int[][] matrixResIt = new int[NUM_ROWS[tamIndex]][NUM_COLUMNS[tamIndex]];
+            int[][] matrixResRec = new int[NUM_ROWS[tamIndex]][NUM_COLUMNS[tamIndex]];
+
             for(int i = 0; i < NUM_ITERATIONS; i++){
-                int[][] matrix1 = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
-                int[][] matrix2 = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
+                matrix1 = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
+                matrix2 = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
 
                 long iterativeMultiplicationStart = System.nanoTime();
-                int[][] matrixResIt = UPOFrierenMagicalMatrix.multiplyMatrixIterative(matrix1, matrix2);
-
-                System.out.println("\n\nMatrix 1:");
-                printMatrix(matrix1);
-                System.out.println("\n\nMatrix 2");
-                printMatrix(matrix2);
-
-                long iterativeMultiplicationStart = System.nanoTime();
-                int[][] matrixResIt = UPOFrierenMagicalMatrix.multiplyMatrixIterative(matrix1, matrix2);
+                matrixResIt = UPOFrierenMagicalMatrix.multiplyMatrixIterative(matrix1, matrix2);
                 long iterativeMultiplicationEnd = System.nanoTime();
 
-                System.out.println("\n\nMatrix res it: ");
-                printMatrix(matrixResIt);
 
                 long recursiveMultiplicationStart = System.nanoTime();
-                int[][] matrixResRec = UPOFrierenMagicalMatrix.callMultiplyMatrixRecursive(matrix1, matrix2);
+                matrixResRec = UPOFrierenMagicalMatrix.callMultiplyMatrixRecursive(matrix1, matrix2);
                 long recursiveMultiplicationEnd = System.nanoTime();
-                
-                System.out.println("\n\nMatrix res rec: ");
-                printMatrix(matrixResRec);
-
-                System.out.println("\n\nMatrix res rec: ");
-                printMatrix(matrixResRec);
 
                 // Comparar para ver si los resultados de la multiplicación iterativa y recursiva son iguales
 //                if (!UPOFrierenMagicalMatrix.compareMatrix(UPOFrierenMagicalMatrix.multiplyMatrixIterative(matrix1, matrix2), UPOFrierenMagicalMatrix.callMultiplyMatrixRecursive(matrix1, matrix2))) {
@@ -61,9 +50,41 @@ public class UPOFrierenMagicalMatrix {
             iterativeDurationMiliseconds = iterativeMultiplicationTotal / 1000000.0; // entre un millón para pasar de nanosegundos a ms
             recursiveDurationMiliseconds = recursiveMultiplicationTotal / 1000000.0;
 
-            System.out.println("\n====================\nTotal de tiempo para " + NUM_ITERATIONS + " iteraciones para una matriz de tamaño " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + ": ");
-            System.out.println("Iterativo: " + iterativeDurationMiliseconds + "ms");
-            System.out.println("Recursivo: " + recursiveDurationMiliseconds + "ms");
+            printResults(matrix1, matrix2, matrixResIt, matrixResRec, tamIndex, (long) iterativeDurationMiliseconds, (long) recursiveDurationMiliseconds);
+        }
+    }
+
+    public static void printResults(int[][] matrix1, int[][] matrix2, int[][] matrixResIt, int[][] matrixResRec, int tamIndex, long iterativeDurationMiliseconds, long recursiveDurationMiliseconds) {
+         System.out.println("\n=============\n Resultados para un tamaño de " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + ": ");
+
+        System.out.println("Iterativo: " + iterativeDurationMiliseconds + "ms");
+        System.out.println("Recursivo: " + recursiveDurationMiliseconds + "ms");
+
+
+        // Si son muchas, no mostrar las matrices, porque se llenaria la pantalla de numeros y no se veria nada
+        if (NUM_ROWS[tamIndex] > 10 || NUM_COLUMNS[tamIndex] > 10) {
+            System.out.println("\nMatrices demasiado grandes para mostrar, no se muestran los resultados de la multiplicación.");
+
+        }else {
+            System.out.println("\nMatriz 1: ");
+            printMatrix(matrix1);
+
+            System.out.println("\nMatriz 2: ");
+            printMatrix(matrix2);
+
+            System.out.println("\nMatriz resultado de la multiplicación iterativa: ");
+            printMatrix(matrixResIt);
+
+            System.out.println("\nMatriz resultado de la multiplicación recursiva: ");
+            printMatrix(matrixResRec);
+        }
+
+
+        // Comparar para ver si los resultados de la multiplicación iterativa y recursiva son iguales
+        if (!compareMatrix(matrixResIt, matrixResRec)) {
+            System.out.println("\nError: Los resultados de la multiplicación iterativa y recursiva no coinciden.");
+        } else {
+            System.out.println("\nLos resultados de ambas multiplicaciones coinciden!");
         }
     }
 
@@ -82,12 +103,16 @@ public class UPOFrierenMagicalMatrix {
 
     // Metodo auxiliar por si queremos comprobar
     public static void printMatrix(int[][] matrix){
+        StringBuilder sb = new StringBuilder();
+
         for(int i = 0; i < matrix.length; i++){
-            System.out.print("\n{");
+            sb.append("{");
             for(int j = 0; j < matrix[0].length-1; j++){
-                System.out.print(matrix[i][j] + ", ");
+                sb.append(matrix[i][j]).append(", ");
             }
-            System.out.print(matrix[i][matrix[0].length-1] + "}");
+            sb.append(matrix[i][matrix[0].length-1]).append("}");
+            System.out.println(sb.toString());
+            sb.setLength(0);
         }
     }
 
@@ -146,10 +171,7 @@ public class UPOFrierenMagicalMatrix {
         return resultMatrix;
     }
 
-    // Metodo auxilirar que multiplica y suma la fila de la primera con la columna de la segunda
-    public static int multiplyListsInMatrix(int[] rowOfFirst, int[] colOfSecond) {
-        int result = 0;
-    // Metodo auxilirar que multiplica y suma la fila de la primera con la columna de la segunda
+    // Metodo auxiliar que multiplica y suma la fila de la primera con la columna de la segunda
     public static int multiplyListsInMatrix(int[] rowOfFirst, int[] colOfSecond) {
         int result = 0;
 
