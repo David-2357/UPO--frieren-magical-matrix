@@ -256,7 +256,7 @@ public class UPOFrierenMagicalMatrix {
 
         // Comparar para ver si los resultados de la multiplicación iterativa y recursiva son iguales
         if (!compareMatrix(matrixResIt, matrixResRec)) {
-            System.out.println("\nError: Los resultados de la multiplicación iterativa y recursiva no coinciden.");
+            System.out.println("\nError: Los resultados de la multiplicación iterativa y recursiva no coinciden");
         } else {
             System.out.println("\n\nAdemás, los resultados de ambas multiplicaciones coinciden!");
         }
