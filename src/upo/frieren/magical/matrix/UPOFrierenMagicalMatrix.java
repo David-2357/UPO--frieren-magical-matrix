@@ -72,13 +72,13 @@ public class UPOFrierenMagicalMatrix {
         if(square){
             System.out.println("\n=============\nResultados para un tamaño de " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + " (warmup de " + (NUM_ITERATIONS - 1) + " iteraciones):");
 
-            System.out.println("Iterativo: " + iterativeDurationMiliseconds + "ms");
-            System.out.println("Recursivo: " + recursiveDurationMiliseconds + "ms");
+            System.out.println(" Iterativo: " + iterativeDurationMiliseconds + "ms");
+            System.out.println(" Recursivo: " + recursiveDurationMiliseconds + "ms");
         } else {
             System.out.println("\n=============\nResultados para un tamaño de una matriz de " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + "multiplicado por otra de " + NUM_COLUMNS[tamIndex] + "x" + NUM_COLUMNS2[tamIndex] + " (warmup de " + (NUM_ITERATIONS - 1) + " iteraciones):");
 
-            System.out.println("Iterativo: " + iterativeDurationMiliseconds + "ms");
-            System.out.println("Recursivo: " + recursiveDurationMiliseconds + "ms");
+            System.out.println(" Iterativo: " + iterativeDurationMiliseconds + "ms");
+            System.out.println(" Recursivo: " + recursiveDurationMiliseconds + "ms");
         }
 
         if(viewMatrices){
