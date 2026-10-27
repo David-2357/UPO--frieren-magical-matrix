@@ -143,6 +143,7 @@ public class UPOFrierenMagicalMatrix {
             return false;
         }
 
+
         // Comprobamos la ultima por si acaso xd
         return matrix1[matrix1.length - 1].length == matrix2.length;
     }
@@ -175,7 +176,7 @@ public class UPOFrierenMagicalMatrix {
                 }else {
                     colValue = new int[rowsMatrix2];
 
-                    for (int i = 0; i < matrix2[0].length; i++) {
+                    for (int i = 0; i < rowsMatrix2; i++) {
                         colValue[i] = matrix2[i][col];
                     }
 
@@ -213,7 +214,7 @@ public class UPOFrierenMagicalMatrix {
         int totalRows = matrix1.length;
         int totalCols = matrix2[0].length;
 
-        int[][] result = new int[totalCols][totalRows];
+        int[][] result = new int[totalRows][totalCols];
 
         multiplyColumns(matrix1, matrix2, 0, result);
 
@@ -222,14 +223,17 @@ public class UPOFrierenMagicalMatrix {
 
     // Metodo recursivo que multiplica las columnas de la segunda matriz por todas las filas de la primera
     public static void multiplyColumns(int[][] matrix1, int[][] matrix2, int col ,int[][] result) {
+        int numCols = matrix2[0].length;
+        int numElementsInColumn = matrix2.length;
+
         // Caso base, cuando se han terminado las columnas de grimorios
-        if (col >= matrix2[0].length) {
+        if (col >= numCols) {
             return;
         }
 
         // Sacamos la columna actual
-        int[] currentColumn = new int[matrix2.length];
-        for (int i = 0; i < matrix2.length; i++) {
+        int[] currentColumn = new int[numElementsInColumn];
+        for (int i = 0; i < numElementsInColumn; i++) {
             currentColumn[i] = matrix2[i][col];
         }
 
@@ -242,14 +246,17 @@ public class UPOFrierenMagicalMatrix {
 
     // Metodo recursivo que multiplica una columna de la segunda matriz por todas las filas de la primera (complementario al primero)
     public static void multiplyRows(int[][] matrix1, int[] column, int row, int col, int[][] result) {
+        int numRows = matrix1.length;
+        int numElementsInRow = matrix1[0].length;
+
         // Caso base, se han acabado las filas de grimorios
-        if (row >= matrix1.length) {
+        if (row >= numRows) {
             return;
         }
 
         // Multiplicamos y sumamos la columna y fila de cada una
         int sum = 0;
-        for (int k = 0; k < matrix1[0].length; k++) {
+        for (int k = 0; k < numElementsInRow; k++) {
             sum += matrix1[row][k] * column[k];
         }
 
@@ -261,12 +268,18 @@ public class UPOFrierenMagicalMatrix {
 
     // Metodo auxiliar para ver si dan el mismo resultado la iterativa y la recursiva (Hecho por Heiter, que sabe mas de estas cosas xd)
     public static boolean compareMatrix(int[][] matrix1, int[][] matrix2) {
-        if (!UPOFrierenMagicalMatrix.bothMatrixCanBeMultiplied(matrix1, matrix2)) {
-            return false;
-        }
+        int totalRows = matrix1.length;
 
-        for (int i = 0; i < matrix1.length; i++) {
-            for (int j = 0; j < matrix1[0].length; j++) {
+        for (int i = 0; i < totalRows; i++) {
+            if (matrix1[i] == null || matrix2[i] == null) {
+                return false;
+            }
+
+            if (matrix1[i].length != matrix2[i].length) {
+                return false;
+            }
+
+            for (int j = 0; j < matrix1[i].length; j++) {
                 if (matrix1[i][j] != matrix2[i][j]) {
                     return false;
                 }
