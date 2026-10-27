@@ -13,6 +13,8 @@ public class UPOFrierenMagicalMatrix {
 
     public static void main(String[] args) {
         for(int tamIndex = 0; tamIndex < NUM_ROWS.length; tamIndex++){
+
+            // aqui declaramos las variables
             long iterativeMultiplicationTotal = 0;
             long recursiveMultiplicationTotal = 0;
             double iterativeDurationMiliseconds = 0;
@@ -24,6 +26,7 @@ public class UPOFrierenMagicalMatrix {
             int[][] matrixResIt;
             int[][] matrixResRec;
 
+            // ahora inicializamos las variables según se pidan cuadradas o no cuadradas
             if(square){
                 matrix1 = new int[NUM_ROWS[tamIndex]][NUM_COLUMNS[tamIndex]];
                 matrix2 = new int[NUM_ROWS[tamIndex]][NUM_COLUMNS[tamIndex]];
@@ -39,6 +42,7 @@ public class UPOFrierenMagicalMatrix {
             }
 
             for(int i = 0; i < NUM_ITERATIONS; i++){
+                // generamos las matrices aleatoriamente
                 if(square){
                     matrix1 = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
                     matrix2 = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
@@ -47,15 +51,18 @@ public class UPOFrierenMagicalMatrix {
                     matrix2 = generateRandomMatrix(NUM_COLUMNS[tamIndex], NUM_COLUMNS2[tamIndex]);
                 }
 
+                // tomamos el tiempo actual, ejecutamos la función para multiplicar iterativamente, y tomamos el tiempo final
                 long iterativeMultiplicationStart = System.nanoTime();
                 matrixResIt = UPOFrierenMagicalMatrix.multiplyMatrixIterative(matrix1, matrix2);
                 long iterativeMultiplicationEnd = System.nanoTime();
 
 
+                // tomamos el tiempo actual, ejecutamos la función para multiplicar recursivamente, y tomamos el tiempo final
                 long recursiveMultiplicationStart = System.nanoTime();
                 matrixResRec = UPOFrierenMagicalMatrix.callMultiplyMatrixRecursive(matrix1, matrix2);
                 long recursiveMultiplicationEnd = System.nanoTime();
 
+                // restamos para obtener la diferencia de tiempo entre fin e inicio, para saber cuánto ha tardado en ejecutarse
                 iterativeMultiplicationTotal += iterativeMultiplicationEnd - iterativeMultiplicationStart;
                 recursiveMultiplicationTotal += recursiveMultiplicationEnd - recursiveMultiplicationStart;
             }
@@ -69,6 +76,7 @@ public class UPOFrierenMagicalMatrix {
 
     public static void printResults(int[][] matrix1, int[][] matrix2, int[][] matrixResIt, int[][] matrixResRec, int tamIndex, double iterativeDurationMiliseconds, double recursiveDurationMiliseconds, int NUM_ITERATIONS) {
 
+        // el output dependerá de si se han pedido matrices cuadradas o no cuadradas
         if(square){
             System.out.println("\n=============\nResultados para un tamaño de " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + " (warmup de " + (NUM_ITERATIONS - 1) + " iteraciones):");
 
@@ -81,6 +89,7 @@ public class UPOFrierenMagicalMatrix {
             System.out.println(" Recursivo: " + recursiveDurationMiliseconds + "ms");
         }
 
+        // si se pide mostrar los resultados de las multiplicaciones, entonces mostramos este contenido extra por la pantalla
         if(viewMatrices){
             // Si son muchas, no mostrar las matrices, porque se llenaria la pantalla de numeros y no se veria nada xd
             if (NUM_ROWS[tamIndex] > 10 || NUM_COLUMNS[tamIndex] > 10) {
@@ -116,7 +125,7 @@ public class UPOFrierenMagicalMatrix {
 
         for(int i = 0; i < rows; i++){
             for(int j = 0; j < columns; j++){
-                matrix[i][j] = (int) (Math.random() * MAX_NUM_RANDOM);
+                matrix[i][j] = (int) (Math.random() * MAX_NUM_RANDOM); // MAX_NUM_RANDOM es una constante modificable antes de ejecutar el código
             }
         }
 
@@ -145,11 +154,11 @@ public class UPOFrierenMagicalMatrix {
             return false;
         }
 
-
         // Comprobamos la ultima por si acaso xd
         return matrix1[matrix1.length - 1].length == matrix2.length;
     }
 
+    // Metodo principal para multiplicar las matrices de forma iterativa
     public static int[][] multiplyMatrixIterative(int[][] matrix1, int[][] matrix2) {
         // Validacion inicial (hecha por Fern, porque Frieren sigue dormida xd)
         if (!UPOFrierenMagicalMatrix.bothMatrixCanBeMultiplied(matrix1, matrix2)) {
