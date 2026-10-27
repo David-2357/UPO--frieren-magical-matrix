@@ -6,7 +6,9 @@ public class UPOFrierenMagicalMatrix {
     public static final int NUM_ITERATIONS = 5; // cuantas iteraciones se hacen para el warmup
     public static final int[] NUM_ROWS = {2, 5, 10, 20, 50, 100, 500, 1000}; // array de numeros de filas
     public static final int[] NUM_COLUMNS = {2, 5, 10, 20, 50, 100, 500, 1000}; // array de numeros de columnas
-    public static int MAX_NUM_RANDOM = 10; // numero maximo que puede salir al rellenar las matrices con numeros aleatorios
+    public static final int[] NUM_COLUMNS2 = {3, 6, 11, 21, 51, 101, 501, 1001}; // por si se decide hacer con matrices no cuadradas
+    public static final int MAX_NUM_RANDOM = 10; // numero maximo que puede salir al rellenar las matrices con numeros aleatorios
+    public static final boolean cuadradas = false; // si quieres que las matrices sean cuadradas o no
 
     public static void main(String[] args) {
         for(int tamIndex = 0; tamIndex < NUM_ROWS.length; tamIndex++){
@@ -15,15 +17,34 @@ public class UPOFrierenMagicalMatrix {
             double iterativeDurationMiliseconds = 0;
             double recursiveDurationMiliseconds = 0;
 
-            int[][] matrix1 = new int[NUM_ROWS[tamIndex]][NUM_COLUMNS[tamIndex]];
-            int[][] matrix2 = new int[NUM_ROWS[tamIndex]][NUM_COLUMNS[tamIndex]];
+            int[][] matrix1;
+            int[][] matrix2;
 
-            int[][] matrixResIt = new int[NUM_ROWS[tamIndex]][NUM_COLUMNS[tamIndex]];
-            int[][] matrixResRec = new int[NUM_ROWS[tamIndex]][NUM_COLUMNS[tamIndex]];
+            int[][] matrixResIt;
+            int[][] matrixResRec;
+
+            if(cuadradas){
+                matrix1 = new int[NUM_ROWS[tamIndex]][NUM_COLUMNS[tamIndex]];
+                matrix2 = new int[NUM_ROWS[tamIndex]][NUM_COLUMNS[tamIndex]];
+
+                matrixResIt = new int[NUM_ROWS[tamIndex]][NUM_COLUMNS[tamIndex]];
+                matrixResRec = new int[NUM_ROWS[tamIndex]][NUM_COLUMNS[tamIndex]];
+            } else {
+                matrix1 = new int[NUM_ROWS[tamIndex]][NUM_COLUMNS[tamIndex]];
+                matrix2 = new int[NUM_COLUMNS[tamIndex]][NUM_COLUMNS2[tamIndex]];
+
+                matrixResIt = new int[NUM_ROWS[tamIndex]][NUM_COLUMNS2[tamIndex]];
+                matrixResRec = new int[NUM_ROWS[tamIndex]][NUM_COLUMNS2[tamIndex]];
+            }
 
             for(int i = 0; i < NUM_ITERATIONS; i++){
-                matrix1 = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
-                matrix2 = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
+                if(cuadradas){
+                    matrix1 = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
+                    matrix2 = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
+                } else {
+                    matrix1 = generateRandomMatrix(NUM_ROWS[tamIndex], NUM_COLUMNS[tamIndex]);
+                    matrix2 = generateRandomMatrix(NUM_COLUMNS[tamIndex], NUM_COLUMNS2[tamIndex]);
+                }
 
                 long iterativeMultiplicationStart = System.nanoTime();
                 matrixResIt = UPOFrierenMagicalMatrix.multiplyMatrixIterative(matrix1, matrix2);
@@ -46,15 +67,22 @@ public class UPOFrierenMagicalMatrix {
     }
 
     public static void printResults(int[][] matrix1, int[][] matrix2, int[][] matrixResIt, int[][] matrixResRec, int tamIndex, double iterativeDurationMiliseconds, double recursiveDurationMiliseconds, int NUM_ITERATIONS) {
-         System.out.println("\n=============\nResultados para un tamaño de " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + " (warmup de " + (NUM_ITERATIONS - 1) + " iteraciones):");
 
-        System.out.println(" Iterativo: " + iterativeDurationMiliseconds + "ms");
-        System.out.println(" Recursivo: " + recursiveDurationMiliseconds + "ms");
+        if(cuadradas){
+            System.out.println("\n=============\nResultados para un tamaño de " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + " (warmup de " + (NUM_ITERATIONS - 1) + " iteraciones):");
 
+            System.out.println(" Iterativo: " + iterativeDurationMiliseconds + "ms");
+            System.out.println(" Recursivo: " + recursiveDurationMiliseconds + "ms");
+        } else {
+            System.out.println("\n=============\nResultados para un tamaño de una matriz de " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + "multiplicado por otra de " + NUM_COLUMNS[tamIndex] + "x" + NUM_COLUMNS2[tamIndex] + " (warmup de " + (NUM_ITERATIONS - 1) + " iteraciones):");
+
+            System.out.println(" Iterativo: " + iterativeDurationMiliseconds + "ms");
+            System.out.println(" Recursivo: " + recursiveDurationMiliseconds + "ms");
+        }
 
         // Descomentar si se quieren ver las matrices
         // Si son muchas, no mostrar las matrices, porque se llenaria la pantalla de numeros y no se veria nada xd
-        /* if (NUM_ROWS[tamIndex] > 10 || NUM_COLUMNS[tamIndex] > 10) {
+        if (NUM_ROWS[tamIndex] > 10 || NUM_COLUMNS[tamIndex] > 10) {
             System.out.println("\nMatrices mágicas demasiado grandes para mostrar. Frieren podría esperar mil años a que aparezcan los resultados de la multiplicación, pero le daria pereza revisarlos todos. ( ￣＾￣)");
 
         }else {
@@ -69,7 +97,7 @@ public class UPOFrierenMagicalMatrix {
 
             System.out.println("\nMatriz resultado de la multiplicación recursiva: ");
             printMatrix(matrixResRec);
-        }*/
+        }
 
 
         // Comparar para ver si los resultados de la multiplicación iterativa y recursiva son iguales
