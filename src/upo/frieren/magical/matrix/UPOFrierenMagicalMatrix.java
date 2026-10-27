@@ -8,7 +8,7 @@ public class UPOFrierenMagicalMatrix {
     public static final int[] NUM_COLUMNS = {2, 5, 10, 20, 50, 100, 500, 1000}; // array de numeros de columnas
     public static final int[] NUM_COLUMNS2 = {3, 6, 11, 21, 51, 101, 501, 1001}; // por si se decide hacer con matrices no cuadradas
     public static final int MAX_NUM_RANDOM = 10; // numero maximo que puede salir al rellenar las matrices con numeros aleatorios
-    public static final boolean cuadradas = false; // si quieres que las matrices sean cuadradas o no
+    public static final boolean cuadradas = true; // si quieres que las matrices sean cuadradas o no
     public static final boolean verMatrices = true; // si quieres ver las matrices y los resultados, para comprobar que la multiplicación es correcta
 
     public static void main(String[] args) {
