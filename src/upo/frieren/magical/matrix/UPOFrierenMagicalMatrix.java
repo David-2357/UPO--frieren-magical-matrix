@@ -9,6 +9,7 @@ public class UPOFrierenMagicalMatrix {
     public static final int[] NUM_COLUMNS2 = {3, 6, 11, 21, 51, 101, 501, 1001}; // por si se decide hacer con matrices no cuadradas
     public static final int MAX_NUM_RANDOM = 10; // numero maximo que puede salir al rellenar las matrices con numeros aleatorios
     public static final boolean cuadradas = true; // si quieres que las matrices sean cuadradas o no
+    public static final boolean verMatrices = true; // si quieres ver las matrices y los resultados, para comprobar que la multiplicación es correcta
 
     public static void main(String[] args) {
         for(int tamIndex = 0; tamIndex < NUM_ROWS.length; tamIndex++){
@@ -71,41 +72,42 @@ public class UPOFrierenMagicalMatrix {
         if(cuadradas){
             System.out.println("\n=============\nResultados para un tamaño de " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + " (warmup de " + (NUM_ITERATIONS - 1) + " iteraciones):");
 
-            System.out.println(" Iterativo: " + iterativeDurationMiliseconds + "ms");
-            System.out.println(" Recursivo: " + recursiveDurationMiliseconds + "ms");
+            System.out.println("Iterativo: " + iterativeDurationMiliseconds + "ms");
+            System.out.println("Recursivo: " + recursiveDurationMiliseconds + "ms");
         } else {
             System.out.println("\n=============\nResultados para un tamaño de una matriz de " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + "multiplicado por otra de " + NUM_COLUMNS[tamIndex] + "x" + NUM_COLUMNS2[tamIndex] + " (warmup de " + (NUM_ITERATIONS - 1) + " iteraciones):");
 
-            System.out.println(" Iterativo: " + iterativeDurationMiliseconds + "ms");
-            System.out.println(" Recursivo: " + recursiveDurationMiliseconds + "ms");
+            System.out.println("Iterativo: " + iterativeDurationMiliseconds + "ms");
+            System.out.println("Recursivo: " + recursiveDurationMiliseconds + "ms");
         }
 
-        // Descomentar si se quieren ver las matrices
-        // Si son muchas, no mostrar las matrices, porque se llenaria la pantalla de numeros y no se veria nada xd
-        if (NUM_ROWS[tamIndex] > 10 || NUM_COLUMNS[tamIndex] > 10) {
-            System.out.println("\nMatrices mágicas demasiado grandes para mostrar. Frieren podría esperar mil años a que aparezcan los resultados de la multiplicación, pero le daria pereza revisarlos todos. ( ￣＾￣)");
+        if(verMatrices){
+            // Si son muchas, no mostrar las matrices, porque se llenaria la pantalla de numeros y no se veria nada xd
+            if (NUM_ROWS[tamIndex] > 10 || NUM_COLUMNS[tamIndex] > 10) {
+                System.out.println("\nMatrices mágicas demasiado grandes para mostrar. Frieren podría esperar mil años a que aparezcan los resultados de la multiplicación, pero le daria pereza revisarlos todos. ( ￣＾￣)");
 
-        }else {
-            System.out.println("\nMatriz magica 1: ");
-            printMatrix(matrix1);
+            } else {
+                System.out.println("\nMatriz magica 1: ");
+                printMatrix(matrix1);
 
-            System.out.println("\nMatriz magica 2: ");
-            printMatrix(matrix2);
+                System.out.println("\nMatriz magica 2: ");
+                printMatrix(matrix2);
 
-            System.out.println("\nMatriz resultado de la multiplicación iterativa: ");
-            printMatrix(matrixResIt);
+                System.out.println("\nMatriz resultado de la multiplicación iterativa: ");
+                printMatrix(matrixResIt);
 
-            System.out.println("\nMatriz resultado de la multiplicación recursiva: ");
-            printMatrix(matrixResRec);
+                System.out.println("\nMatriz resultado de la multiplicación recursiva: ");
+                printMatrix(matrixResRec);
+            } 
+
+            // Comparar para ver si los resultados de la multiplicación iterativa y recursiva son iguales
+            if (!compareMatrix(matrixResIt, matrixResRec)) {
+                System.out.println("\nError: Los resultados de la multiplicación iterativa y recursiva no coinciden. Heiter es un hater (ｰ ｰ;)");
+            } else {
+                System.out.println("\nLos resultados de ambas multiplicaciones coinciden, yay (─‿‿─)! (Gracias Heiter por comprobarlo)");
+            }
         }
 
-
-        // Comparar para ver si los resultados de la multiplicación iterativa y recursiva son iguales
-        if (!compareMatrix(matrixResIt, matrixResRec)) {
-            System.out.println("\nError: Los resultados de la multiplicación iterativa y recursiva no coinciden. Heiter es un hater (ｰ ｰ;)");
-        } else {
-            System.out.println("\nLos resultados de ambas multiplicaciones coinciden, yay (─‿‿─)! (Gracias Heiter por comprobarlo)");
-        }
     }
 
     // Metodo para generar matrices aleatorias
