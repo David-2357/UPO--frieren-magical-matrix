@@ -3,7 +3,7 @@ package upo.frieren.magical.matrix;
 
 public class UPOFrierenMagicalMatrix {
 
-    public static final int NUM_ITERATIONS = 5; // cuantas iteraciones se hacen para el warmup
+    public static final int NUM_ITERATIONS = 5; // cuantas iteraciones se hacen para sacar un promedio
     public static final int[] NUM_ROWS = {2, 5, 10, 20, 50, 100, 500, 1000}; // array de numeros de filas
     public static final int[] NUM_COLUMNS = {2, 5, 10, 20, 50, 100, 500, 1000}; // array de numeros de columnas
     public static final int[] NUM_COLUMNS2 = {3, 6, 11, 21, 51, 101, 501, 1001}; // por si se decide hacer con matrices no cuadradas
@@ -67,8 +67,9 @@ public class UPOFrierenMagicalMatrix {
                 recursiveMultiplicationTotal += recursiveMultiplicationEnd - recursiveMultiplicationStart;
             }
 
-            iterativeDurationMiliseconds = iterativeMultiplicationTotal / 1000000.0; // entre un millón para pasar de nanosegundos a ms
-            recursiveDurationMiliseconds = recursiveMultiplicationTotal / 1000000.0;
+            // dividiremos entre un millón para pasar de nanosegundos a ms, y luego entre NUM_ITERATIONS para sacar el tiempo promedio
+            iterativeDurationMiliseconds = (iterativeMultiplicationTotal / 1000000.0) / NUM_ITERATIONS;
+            recursiveDurationMiliseconds = (recursiveMultiplicationTotal / 1000000.0) / NUM_ITERATIONS;
 
             printResults(matrix1, matrix2, matrixResIt, matrixResRec, tamIndex, iterativeDurationMiliseconds, recursiveDurationMiliseconds, NUM_ITERATIONS);
         }
@@ -78,15 +79,15 @@ public class UPOFrierenMagicalMatrix {
 
         // el output dependerá de si se han pedido matrices cuadradas o no cuadradas
         if(squareMatrices){
-            System.out.println("\n=============\nResultados para un tamaño de " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + " (warmup de " + (NUM_ITERATIONS - 1) + " iteraciones):");
+            System.out.println("\n=============\nResultados para un tamaño de " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + " (promedio de " + NUM_ITERATIONS + " iteraciones):");
 
-            System.out.println(" Iterativo: " + iterativeDurationMiliseconds + "ms");
-            System.out.println(" Recursivo: " + recursiveDurationMiliseconds + "ms");
+            System.out.println(" Iterativo: " + String.format("%.5f", iterativeDurationMiliseconds) + "ms");
+            System.out.println(" Recursivo: " + String.format("%.5f", recursiveDurationMiliseconds) + "ms");
         } else {
-            System.out.println("\n=============\nResultados para un tamaño de una matriz de " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + "multiplicado por otra de " + NUM_COLUMNS[tamIndex] + "x" + NUM_COLUMNS2[tamIndex] + " (warmup de " + (NUM_ITERATIONS - 1) + " iteraciones):");
+            System.out.println("\n=============\nResultados para un tamaño de una matriz de " + NUM_ROWS[tamIndex] + "x" + NUM_COLUMNS[tamIndex] + "multiplicado por otra de " + NUM_COLUMNS[tamIndex] + "x" + NUM_COLUMNS2[tamIndex] + " (promedio de " + NUM_ITERATIONS + " iteraciones):");
 
-            System.out.println(" Iterativo: " + iterativeDurationMiliseconds + "ms");
-            System.out.println(" Recursivo: " + recursiveDurationMiliseconds + "ms");
+            System.out.println(" Iterativo: " + String.format("%.5f", iterativeDurationMiliseconds) + "ms");
+            System.out.println(" Recursivo: " + String.format("%.5f", recursiveDurationMiliseconds) + "ms");
         }
 
         // si se pide mostrar los resultados de las multiplicaciones, entonces mostramos este contenido extra por la pantalla
